@@ -74,6 +74,7 @@ function writeToFile(fileName, data) {
         fs.writeFile(fileName, data, err => {
             if (err) {
                 reject(err);
+                return;
             }
             resolve({
                 ok: true,
