@@ -8,37 +8,86 @@ const generateBadges = licenseInput => {
   } else if (licenseInput === 'MIT') {
     return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
   }
-}
+};
+
+const generateTests = testsText => {
+  if (!testsText) {
+    return ``;
+  }
+  return `
+  ## Tests
+  ${testsText}
+  `
+};
+
+const tableOfContentTests = testsTable => {
+  if (!testsTable) {
+    return ``;
+  }
+  return `
+  * [Tests](#tests)
+  `
+};
+
+const generateContribution = contributionText => {
+  if (!contributionText) {
+    return ``;
+  }
+  return `
+  ## Contribution
+  ${contributionText}
+  `
+};
+
+const tableOfContentContribution = contributionTable => {
+  if (!contributionTable) {
+    return ``;
+  }
+  return `
+  * [Contribution](#contribution)
+  `
+};
 
 // function to generate markdown for README
-function generateMarkdown(data) {
-  return `${generateBadges(...data.license)}
+module.exports = templateMarkdown => {
+  const {
+    github,
+    email,
+    title,
+    description,
+    installation,
+    usage,
+    license,
+    contribution,
+    tests,
+    questions
+  } = templateMarkdown
 
-  # ${data.title}
+  return `${generateBadges(...license)}
+  # ${title}
   # Description
-  ${data.description}
+  ${description}
 
   ### Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Contribution](#contribution)
-  * [License](#license)
+  ${tableOfContentTests(tests)}
+  ${tableOfContentContribution(contribution)}
+  * [Questions](#questions)
 
   ## Installation
-  ${data.installation}
+  ${installation}
+  
   ## Usage
-  ${data.usage}
-  ## Contribution
-  ${data.contribution}
-  ## Tests
-  ${data.tests}
-  ## Questions
+  ${usage}
 
-  ${data.questions}
-  * Got questions? [email me](mailto:${data.email})<br>
-  * [My GitHub profile](https://github.com/${data.github})
+  ${generateContribution(contribution)}
+
+  ${generateTests(tests)}
+  
+ ## Questions
+  ${questions}
+  * Got questions? [email me](mailto:${email})<br>
+  * [My GitHub profile](https://github.com/${github})
       `;
-}
-
-// enable import from other files
-module.exports = generateMarkdown;
+};
