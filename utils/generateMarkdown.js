@@ -1,3 +1,4 @@
+// function to retrieve license badges based on user selection
 const generateBadges = licenseInput => {
   if (licenseInput === 'Apache License 2.0') {
     return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
@@ -10,6 +11,17 @@ const generateBadges = licenseInput => {
   }
 };
 
+// optional display of contribution and tests text if selected
+const generateContribution = contributionText => {
+  if (!contributionText) {
+    return ``;
+  }
+  return `
+  ## Contribution
+  ${contributionText}
+  `
+};
+
 const generateTests = testsText => {
   if (!testsText) {
     return ``;
@@ -17,6 +29,16 @@ const generateTests = testsText => {
   return `
   ## Tests
   ${testsText}
+  `
+};
+
+// optional display of contribution and tests titles for table of content if selected
+const tableOfContentContribution = contributionTable => {
+  if (!contributionTable) {
+    return ``;
+  }
+  return `
+  * [Contribution](#contribution)
   `
 };
 
@@ -29,24 +51,6 @@ const tableOfContentTests = testsTable => {
   `
 };
 
-const generateContribution = contributionText => {
-  if (!contributionText) {
-    return ``;
-  }
-  return `
-  ## Contribution
-  ${contributionText}
-  `
-};
-
-const tableOfContentContribution = contributionTable => {
-  if (!contributionTable) {
-    return ``;
-  }
-  return `
-  * [Contribution](#contribution)
-  `
-};
 
 // function to generate markdown for README
 module.exports = templateMarkdown => {
@@ -71,19 +75,20 @@ module.exports = templateMarkdown => {
   ### Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
-  ${tableOfContentTests(tests)}
   ${tableOfContentContribution(contribution)}
+  ${tableOfContentTests(tests)}
   * [Questions](#questions)
 
   ## Installation
   ${installation}
   
   ## Usage
-  ${usage}
-
-  ${generateContribution(contribution)}
+  Stepts how to run the application are available in the following demo:<br>
+  ![](${usage})
 
   ${generateTests(tests)}
+
+  ${generateContribution(contribution)}
   
  ## Questions
   ${questions}

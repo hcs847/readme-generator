@@ -6,7 +6,7 @@ const generateMarkDown = require('./utils/generateMarkdown');
 const questions = [
     'Enter your GitHub username. (Required)', 'Enter your email address. (Required)',
     'Enter the title of the project. (Required)', 'Enter a description of the project. (Required)',
-    'Enter Installation instructions. (Required)', 'Enter Usage information. (Required)',
+    'Enter Installation instructions. (Required)', 'Please provide the relative path for a demo. (Required)',
     'What is the License for the project?', 'Would you like to include a contribution section?',
     'What are the contribution guidelines?', 'Would you like to include Test instructions?', 'What are the tests instructions?', 'Any additional informtion to list under Questions?'
 ];
@@ -20,15 +20,6 @@ const validateInput = promptField => {
         return false;
     }
 }
-
-// const confirmOptional = confirmSection => {
-//     if (confirmSection) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-
 
 // present user with a list of prompts to capture info for readme file
 const promptUser = () => {
